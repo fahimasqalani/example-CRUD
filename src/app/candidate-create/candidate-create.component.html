@@ -1,0 +1,48 @@
+<!-- CREATE USER -->
+<body>
+  <!-- <div class="container">
+    <div class="row"></div>
+    <div class="form-row justify-content-center">
+      <div class="col-md-8 text-center">
+        <form [formGroup]="form" (ngSubmit)="submitForm()">
+          <div class="form-group input-group-lg">
+            <input class="form-control" placeholder="Name" formControlName="name">
+          </div>
+          <div class="form-group input-group-lg">
+            <input class="form-control" placeholder="Contact" formControlName="contact">
+          </div>
+          <div class="form-group input-group-lg">
+            <input class="form-control" placeholder="Email" formControlName="email">
+          </div>
+          <div class="form-group">
+            <button class="btn btn-success btn-block btn-lg">Create</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div> -->
+
+  <div class="container custom-container">
+    <div class="col-md-12">
+      <h3 class="mb-3 text-center">Create New Candidate</h3>
+  
+      <div class="form-group">
+        <input type="text" [(ngModel)]="candidateDetails.name" class="form-control" placeholder="Name">
+      </div>
+  
+      <div class="form-group">
+        <input type="text" [(ngModel)]="candidateDetails.contact" class="form-control" placeholder="Contact">
+      </div>
+  
+      <div class="form-group">
+        <input type="text" [(ngModel)]="candidateDetails.email" class="form-control" placeholder="Email">
+      </div>
+  
+      <div class="form-group">
+        <button class="btn btn-success btn-lg btn-block" (click)="addCandidate()">Create Candidate</button>
+      </div>
+  
+    </div>
+  </div>
+
+  </body>

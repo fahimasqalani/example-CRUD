@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AppComponent } from './app.component';
-import { InterviewComponent } from './interview/interview.component';
+import { CandidateCreateComponent } from './candidate-create/candidate-create.component';
+import { CandidateListComponent } from './candidate-list/candidate-list.component';
 
 const routes: Routes = [
-  // { path: '', component: AppComponent},
-  { path: 'list', component: InterviewComponent},
+  { path: 'list', component: CandidateListComponent},
+  { path: '', component: CandidateCreateComponent},
 ];
 
 @NgModule({
