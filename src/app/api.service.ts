@@ -8,7 +8,7 @@ import { retry, catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ApiService {
-  
+
   apiurl = "http://139.59.226.52:9876/interview/";
 
   constructor(private http: HttpClient) { }
@@ -17,65 +17,71 @@ export class ApiService {
   //   return this.http.get(this.apiurl);
   // }
 
- /*========================================
-    CRUD Methods for consuming RESTful API
-  =========================================*/
-  
+  /*========================================
+     CRUD Methods for consuming RESTful API
+   =========================================*/
+
   // Http Options
-   httpOptions = {
+  httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
     })
-  }  
+  }
 
   // HttpClient API get() method => Fetch candidates list
   getCandidates(): Observable<Candidate> {
     return this.http.get<Candidate>(this.apiurl)
-    .pipe(
-      retry(1),
-      catchError(this.handleError)
-    )
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+      )
   }
 
   // HttpClient API get() method => Fetch employee
   getCandidate(id): Observable<Candidate> {
     return this.http.get<Candidate>(this.apiurl + id)
-    .pipe(
-      retry(1),
-      catchError(this.handleError)
-    )
-  }  
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+      )
+  }
 
   // HttpClient API post() method => Create employee
   createCandidate(candidate): Observable<Candidate> {
     return this.http.post<Candidate>(this.apiurl, JSON.stringify(candidate), this.httpOptions)
-    .pipe(
-      retry(1),
-      catchError(this.handleError)
-    )
-  }  
-// HttpClient API put() method => Update candidate
-updateCandidate(id, candidate): Observable<Candidate> {
-  return this.http.put<Candidate>(this.apiurl, JSON.stringify(candidate), this.httpOptions)
-  .pipe(
-    retry(1),
-    catchError(this.handleError)
-  )
-}
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+      )
+  }
 
-// HttpClient API delete() method => Delete candidate
-deleteCandidate(id){
-  return this.http.delete<Candidate>(this.apiurl + id, this.httpOptions)
-  .pipe(
-    retry(1),
-    catchError(this.handleError)
-  )
-}
+  // Search candidates
+  searchCandidate(id): Observable<Candidate> {
+    return this.http.get<Candidate>(this.apiurl + id, this.httpOptions)
+  }
+
+  // HttpClient API put() method => Update candidate
+  updateCandidate(id, candidate): Observable<Candidate> {
+    return this.http.put<Candidate>(this.apiurl, JSON.stringify(candidate), this.httpOptions)
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+      )
+  }
+
+  // HttpClient API delete() method => Delete candidate
+  deleteCandidate(id) {
+    return this.http.delete<Candidate>(this.apiurl + id, this.httpOptions)
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+      )
+  }
 
   // Error handling 
   handleError(error) {
     let errorMessage = '';
-    if(error.error instanceof ErrorEvent) {
+    if (error.error instanceof ErrorEvent) {
       // Get client-side error
       errorMessage = error.error.message;
     } else {
@@ -84,5 +90,5 @@ deleteCandidate(id){
     }
     window.alert(errorMessage);
     return throwError(errorMessage);
- }
+  }
 }

@@ -9,6 +9,7 @@ import { ApiService } from '../api.service';
 export class CandidateListComponent implements OnInit {
 
   Candidate: any = [];
+  filteredCandidates: any = [];
 
   constructor(public api: ApiService) { }
 
@@ -22,12 +23,19 @@ export class CandidateListComponent implements OnInit {
       this.Candidate = data;
     })
   }
-// Delete candidate
-deleteCandidate(id) {
-  if (window.confirm('Are you sure, you want to delete?')){
-    this.api.deleteCandidate(id).subscribe(data => {
-      this.loadCandidates()
-    })
+
+  // Search Candidate
+  search() {
+    // todo
+    // this.filteredCandidates = this.api.searchCandidate()
   }
-}  
+
+  // Delete candidate
+  delete(id) {
+    if (window.confirm('Are you sure, you want to delete?')) {
+      this.api.deleteCandidate(id).subscribe(data => {
+        this.loadCandidates()
+      })
+    }
+  }
 }

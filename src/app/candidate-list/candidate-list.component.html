@@ -1,4 +1,23 @@
 <body>
+ <!-- Fileter by id -->
+  <label class="sr-only" for="search">Search</label>
+      <div class="search input-group mb-3">
+        <div class="input-group-prepend">
+          <div class="input-group-text">Search</div>
+        </div>
+        <input
+          id="search"
+          type="text"
+          class="form-control"
+          [(ngModel)]="Candidate"
+          (keyup)="search()"/>
+        <span class="input-group-append">
+          <button
+            class="btn btn-danger"
+            (click)="resetQuery()"
+            [disabled]="!query">&times;</button>
+        </span>
+      </div>
   
   <div class="container">
     <div class="row">
@@ -22,7 +41,7 @@
             <td>{{c.email}}</td>
             <td>
               <button type="button" class="btn btn-info" routerLink="/update/{{c.id}}"><img src="../assets/create-24px.svg"></button>
-              <button type="button" class="btn btn-danger" (click)="deleteCandidate(c.id)"><img src="../assets/delete-24px.svg"></button>
+              <button type="button" class="btn btn-danger" (click)="delete(c.id)"><img src="../assets/delete-24px.svg"></button>
             </td>
           </tr>
         </tbody>
