@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Candidate } from './candidate';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
@@ -77,6 +78,19 @@ export class ApiService {
         catchError(this.handleError)
       )
   }
+
+
+  swalNotification(icon, title, text, cancel) {
+    return Swal.fire({
+      icon: "warning",
+      title: 'Success!',
+      text: text,
+      allowOutsideClick: false,
+      showCancelButton: true,
+      confirmButtonColor: '#5867dd',
+      confirmButtonText: 'OK'
+    })
+}
 
   // Error handling 
   handleError(error) {

@@ -31,11 +31,23 @@ export class CandidateListComponent implements OnInit {
   }
 
   // Delete candidate
+  // delete(id) {
+  //   if (window.confirm('Are you sure, you want to delete?')) {
+  //     this.api.deleteCandidate(id).subscribe(data => {
+  //       this.loadCandidates()
+  //     })
+  //   }
+  // }
+
   delete(id) {
-    if (window.confirm('Are you sure, you want to delete?')) {
-      this.api.deleteCandidate(id).subscribe(data => {
-        this.loadCandidates()
-      })
-    }
+    this.api.swalNotification('Warning', 'Are You Sure?', 'This user will be remove!!', true).then((result) => {
+      if (result.value) {
+        this.api.deleteCandidate(id).subscribe(data => {
+          this.loadCandidates()
+        })
+      }
+    })
+
   }
 }
+
