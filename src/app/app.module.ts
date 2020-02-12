@@ -9,13 +9,15 @@ import { ApiService } from './api.service';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CandidateCreateComponent } from './candidate-create/candidate-create.component';
 import { CandidateListComponent } from './candidate-list/candidate-list.component';
+import { CandidateEditComponent } from './candidate-edit/candidate-edit.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     CandidateCreateComponent,
-    CandidateListComponent
+    CandidateListComponent,
+    CandidateEditComponent
   ],
   imports: [
     BrowserModule,
