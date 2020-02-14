@@ -109,4 +109,27 @@ export class ApiService {
     // window.alert(errorMessage);
     return throwError(errorMessage);
   }
+
+//   getToken() {
+//       return this.http.get(this.apiToken)
+//         .pipe(
+//           retry(1),
+//           catchError(this.handleError)
+//         )
+//     }
+// }
+
+//   addTokenToHeader() {
+//     this.error = null;
+//     this.http.get('http://139.59.226.52:9876/interview/auth',
+//     {
+//       headers: new HttpHeaders({'token': `${this.token}`})
+//     }).subscribe(addHeaderResponse => {
+//       console.log(addHeaderResponse);
+//       alert(addHeaderResponse['message']);
+//     }, error => {
+//       this.error = error.error.error;
+//     });
+//   }
+
 }
