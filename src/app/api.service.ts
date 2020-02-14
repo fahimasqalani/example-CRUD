@@ -30,8 +30,8 @@ export class ApiService {
   }
 
   // HttpClient API get() method => Fetch candidates list
-  getCandidates(): Observable<Candidate> {
-    return this.http.get<Candidate>(this.apiurl)
+  getCandidates(): Observable<Candidate[]> {
+    return this.http.get<Candidate[]>(this.apiurl)
       .pipe(
         retry(1),
         catchError(this.handleError)
@@ -57,9 +57,9 @@ export class ApiService {
   }
 
   // Search candidates
-  searchCandidate(id): Observable<Candidate> {
-    return this.http.get<Candidate>(this.apiurl + id, this.httpOptions)
-  }
+  // searchCandidate(id): Observable<Candidate> {
+  //   return this.http.get<Candidate>(this.apiurl + id, this.httpOptions)
+  // }
 
   // HttpClient API put() method => Update candidate
   updateCandidate(id, candidate): Observable<Candidate> {
@@ -101,8 +101,12 @@ export class ApiService {
     } else {
       // Get server-side error
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-    }
-    window.alert(errorMessage);
+    } Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: errorMessage,
+    })
+    // window.alert(errorMessage);
     return throwError(errorMessage);
   }
 }

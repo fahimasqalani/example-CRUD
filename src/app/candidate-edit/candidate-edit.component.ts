@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-candidate-edit',
@@ -23,10 +24,15 @@ export class CandidateEditComponent implements OnInit {
   }
   // Update candidate date using put request
   update() {
-    if (window.confirm('Confirm updating?')) {
-      this.api.updateCandidate(this.id, this.candidateData).subscribe(data => {
-        this.router.navigate(['/list'])
-      })
-    }
+    this.api.updateCandidate(this.id, this.candidateData).subscribe(data => {
+      return Swal.fire({
+        icon: 'success',
+        allowOutsideClick: true,
+        showConfirmButton: false,
+        text: 'Candidate has been updated',
+        timer: 1500
+      }).then(function () { location.reload(); })
+    })
+    this.router.navigate(['/list']);
   }
 }

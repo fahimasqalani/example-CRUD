@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
+import { Candidate } from '../candidate';
+import { ActivatedRoute, Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-candidate-list',
@@ -8,10 +11,32 @@ import { ApiService } from '../api.service';
 })
 export class CandidateListComponent implements OnInit {
 
-  Candidate: any = [];
-  filteredCandidates: any = [];
+  candidate: any = [];
+  searchById: any = [];
+  loadCandidateById:number;
+  filteredCandidates: Candidate[] = [];
+  candidates: Candidate[] = [];
+  _listFilter = '';
 
-  constructor(public api: ApiService) { }
+  get listFilter(): string {
+    return this._listFilter;
+  }
+  set listFilter(value: string) {
+    this._listFilter = value;
+    this.filteredCandidates = this.listFilter ? this.doFilter(this.listFilter): this.candidates;
+  }
+
+  doFilter(filterBy: string): Candidate[]{
+    filterBy = filterBy.toLocaleLowerCase();
+    return this.candidates.filter((candidate: Candidate) => candidate.name.toLocaleLowerCase().indexOf(filterBy)!== -1);
+  }
+
+  constructor(
+    public api: ApiService,
+    public route: ActivatedRoute,
+    public router: Router,
+    ) { this.filteredCandidates = this.candidates;
+      this.listFilter = '';}
 
   ngOnInit() {
     this.loadCandidates()
@@ -19,25 +44,27 @@ export class CandidateListComponent implements OnInit {
 
   // Get candidates list
   loadCandidates() {
-    return this.api.getCandidates().subscribe((data: {}) => {
-      this.Candidate = data;
+    return this.api.getCandidates().subscribe((data) => {
+      this.candidates = data;
+      this.filteredCandidates = data;
     })
   }
 
   // Search Candidate
-  search() {
-    // todo
-    // this.filteredCandidates = this.api.searchCandidate()
+  search(id: number) {
+    // Send Http request
+    this.api.getCandidate(id).subscribe(searchResult => {
+      // this.searchById = searchResult;
+      // console.log(this.searchById);
+      // this.router.navigate(['/list/:id']);
+      this.filteredCandidates = [];
+      // this.id = searchResult.id;
+      // this.name = searchResult.name;
+      // this.contact = searchResult.contact;
+      // this.email = searchResult.email;
+      this.filteredCandidates[0] = searchResult;
+    })
   }
-
-  // Delete candidate
-  // delete(id) {
-  //   if (window.confirm('Are you sure, you want to delete?')) {
-  //     this.api.deleteCandidate(id).subscribe(data => {
-  //       this.loadCandidates()
-  //     })
-  //   }
-  // }
 
   delete(id) {
     this.api.swalNotification('Warning', 'Are You Sure?', 'This user will be remove!!', true).then((result) => {
@@ -49,5 +76,23 @@ export class CandidateListComponent implements OnInit {
     })
 
   }
+
+  remove(id: number) {
+    return Swal.fire({
+      icon: 'warning',
+      allowOutsideClick: false,
+      showCancelButton: true,
+      text: 'Are you sure to delete this candidate!!!',
+      confirmButtonColor: '#5867dd',
+      confirmButtonText: 'OK'
+    }).then((result) => {
+      if (result.value) {
+        this.api.deleteCandidate(id).subscribe(data => {
+          this.loadCandidates()
+        })
+      }
+    })
+  }
+
 }
 

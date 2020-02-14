@@ -1,31 +1,47 @@
 <body>
- <!-- Fileter by id -->
-  <label class="sr-only" for="search">Search</label>
-      <div class="search input-group mb-3">
-        <div class="input-group-prepend">
-          <div class="input-group-text">Search</div>
-        </div>
-        <input
-          id="search"
-          type="text"
-          class="form-control"
-          [(ngModel)]="Candidate"
-          (keyup)="search()"/>
-        <span class="input-group-append">
-          <button
-            class="btn btn-danger"
-            (click)="resetQuery()"
-            [disabled]="!query">&times;</button>
-        </span>
-      </div>
-  
+
+
   <div class="container">
     <div class="row">
+      <!-- Fileter by name -->
+      <div class="col-md-6">
+        <div class="form-group m-form__group">
+          <input class="form-control" [(ngModel)]="listFilter" type="text" placeholder="Search by Name"
+            id="filterInput" />
+          <hr>
+          <div class="col">
+            <div *ngIf='listFilter' class="form-text text-muted">Filtered by: {{listFilter}}</div>
+          </div>
+        </div>
+      </div>
+      <!-- Fileter by id -->
+      <div class="col-md-6">
+        <div class="input-group ">
+          <input #searchId class="form-control" type="text" id="id" required ngModel name="id"
+            placeholder="Search by ID" />
+          <div class="input-group-append">
+            <button class="btn btn-secondary" type="submit" (click)="search(searchId.value)"
+              [disabled]="searchId.value === ''"><img src="../assets/search-24px.svg">
+              <i class="fa fa-search"></i>
+            </button>
+          </div>
+        </div>
+        <button class="btn btn-warning">
+          Show Token
+        </button>
+        <button class="btn btn-success">
+          Add Header
+        </button>
+        <hr>
+      </div>
+
+    </div>
+    <div class="row">
       <!-- <div class="col-xs-12 col-md-9 col-md-offset-8"> -->
-      <table class="table table-hover" *ngIf="Candidate">
+      <table class="table table-hover" *ngIf="filteredCandidates">
         <thead>
           <tr>
-            <th scope="col">User Id</th>
+            <th scope="col">User ID</th>
             <th scope="col">name</th>
             <th scope="col">contact</th>
             <th scope="col">email</th>
@@ -33,20 +49,21 @@
           </tr>
         </thead>
 
-        <tbody *ngFor="let c of Candidate">
+        <tbody *ngFor="let c of filteredCandidates">
           <tr>
             <td>{{c.id}}</td>
             <td>{{c.name}}</td>
             <td>{{c.contact}}</td>
             <td>{{c.email}}</td>
             <td>
-              <button type="button" class="btn btn-info" routerLink="/update/{{c.id}}"><img src="../assets/create-24px.svg"></button>
-              <button type="button" class="btn btn-danger" (click)="delete(c.id)"><img src="../assets/delete-24px.svg"></button>
+              <button type="button" class="btn btn-info" routerLink="/update/{{c.id}}"><img
+                  src="../assets/create-24px.svg"></button>
+              <button type="button" class="btn btn-danger" (click)="remove(c.id)"><img
+                  src="../assets/delete-24px.svg"></button>
             </td>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
-  <!-- </div> -->
 </body>
