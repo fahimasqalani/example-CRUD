@@ -1,0 +1,3 @@
+.has-danger .form-control, .has-danger .input-group-text {
+    border-color: #f4516c!important;
+}
