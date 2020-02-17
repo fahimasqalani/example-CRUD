@@ -4,6 +4,7 @@ import { Candidate } from './candidate';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 import Swal from 'sweetalert2';
+import { FormControl, FormGroup, FormArray } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -131,5 +132,22 @@ export class ApiService {
 //       this.error = error.error.error;
 //     });
 //   }
+
+markFormGroupTouched(formGroup) {
+  if (formGroup.controls) {
+      const keys = Object.keys(formGroup.controls);
+      for (let i = 0; i < keys.length; i++) {
+          const control = formGroup.controls[keys[i]];
+
+          if (control instanceof FormControl) {
+              control.markAsTouched();
+          } else if (control instanceof FormGroup) {
+              this.markFormGroupTouched(control);
+          } else if (control instanceof FormArray) {
+              this.markFormGroupTouched(control);
+          }
+      }
+  }
+}
 
 }

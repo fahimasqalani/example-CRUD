@@ -1,28 +1,61 @@
 <!-- CREATE USER -->
+
 <body>
-  <!-- <div class="container">
-    <div class="row"></div>
-    <div class="form-row justify-content-center">
-      <div class="col-md-8 text-center">
-        <form [formGroup]="form" (ngSubmit)="submitForm()">
-          <div class="form-group input-group-lg">
-            <input class="form-control" placeholder="Name" formControlName="name">
+  <!-- Reactive form -->
+  <div class="container" custom-container>
+    <div class="row">
+      <div class="col-md-12">
+        <h3 class="mb-3 text-center">Create New Interview Candidate</h3>
+        <form [formGroup]="candidateForm" (ngSubmit)="addCandidate()" >
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group" [ngClass]="{'has-danger': candidateForm.get('name').invalid && candidateForm.get('name').touched}">
+                <label for="name">Name</label>
+                <input type="text" id="name" class="form-control m-input" formControlName="name">
+                <span class="form-control-feedback" *ngIf="candidateForm.hasError('required', 'name') && candidateForm.get('name').touched">
+									*This field is required!
+								</span>
+              </div>
+            </div>
           </div>
-          <div class="form-group input-group-lg">
-            <input class="form-control" placeholder="Contact" formControlName="contact">
+
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group"  >
+                <label for="contact">Contact</label>
+                <input type="text" id="contact" class="form-control"formControlName="contact" >
+              </div>
+            </div>
           </div>
-          <div class="form-group input-group-lg">
-            <input class="form-control" placeholder="Email" formControlName="email">
+
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group" [ngClass]="{'has-danger': candidateForm.get('email').invalid && candidateForm.get('email').touched}">
+                <label for="email">Email</label>
+                <input type="text" id="email" class="form-control" formControlName="email">
+                <span class="form-control-feedback" *ngIf="candidateForm.hasError('required', 'email') && candidateForm.get('email').touched">
+									*This field is required!
+								</span>
+								<span class="form-control-feedback" *ngIf="candidateForm.hasError('email', 'email') && candidateForm.get('email').touched && !candidateForm.hasError('required', 'email')">
+									*Invalid email format!!
+								</span>
+              </div>
+            </div>
           </div>
-          <div class="form-group">
-            <button class="btn btn-success btn-block btn-lg">Create</button>
+
+          <div class="row">
+            <div class="col-md-12">
+              <button type="submit" class="btn btn-success btn-lg">Create</button>
+            </div>
           </div>
+
         </form>
       </div>
     </div>
-  </div> -->
+  </div>
+  <!-- template-driven form -->
 
-  <div class="container custom-container">
+  <!-- <div class="container custom-container">
     <div class="col-md-12">
       <h3 class="mb-3 text-center">Create New Interview Candidate</h3>
   
@@ -43,6 +76,6 @@
       </div>
   
     </div>
-  </div>
+  </div> -->
 
-  </body>
+</body>

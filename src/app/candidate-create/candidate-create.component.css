@@ -1,1 +1,10 @@
 body { margin: 100px; }
+
+html, body {
+    background: #f7f7f7 !important;
+}
+
+.has-danger .form-control, .has-danger .input-group-text, .form-control-feedback{
+    border-color: #f4516c!important;
+    color: #f4516c;
+}
