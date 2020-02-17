@@ -24,7 +24,7 @@ import { CandidateEditComponent } from './candidate-edit/candidate-edit.componen
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [ApiService],
   bootstrap: [AppComponent]
