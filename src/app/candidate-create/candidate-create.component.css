@@ -9,7 +9,10 @@ body, html{
   body{
     margin: 100px;
     margin-bottom: 2px;
-    background: #f7f7f7 !important;
+    padding-right: 12px;
+    padding-left: 12px;
+    background: #3f589c !important;
+    opacity: 0.8;
   }
 
 .has-danger .form-control, .has-danger .input-group-text, .form-control-feedback{
