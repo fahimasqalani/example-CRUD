@@ -17,6 +17,8 @@ export class CandidateListComponent implements OnInit {
   filteredCandidates: Candidate[] = [];
   candidates: Candidate[] = [];
   _listFilter = '';
+  token = '';
+
 
   get listFilter(): string {
     return this._listFilter;
@@ -93,6 +95,22 @@ export class CandidateListComponent implements OnInit {
       }
     })
   }
+
+  onGetToken() {
+    this.api.getToken().subscribe(token => {
+      console.log(token);
+      this.token = token['token'];
+      return Swal.fire({
+        title: 'Token',
+        confirmButtonText: 'Ok',
+        text:
+          'Your token is ' +
+          token['token'],
+        // showLoaderOnConfirm: true,
+      })
+    })
+  }
+
 
 }
 

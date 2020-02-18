@@ -12,7 +12,10 @@ import { FormControl, FormGroup, FormArray } from '@angular/forms';
 export class ApiService {
 
   apiurl = "http://139.59.226.52:9876/interview/";
-
+  apiToken = "http://139.59.226.52:9876/interview/token";
+  apiAuth = "http://139.59.226.52:9876/interview/auth";
+  token = '';
+  
   constructor(private http: HttpClient) { }
 
   // public getUsers() {
@@ -111,14 +114,14 @@ export class ApiService {
     return throwError(errorMessage);
   }
 
-//   getToken() {
-//       return this.http.get(this.apiToken)
-//         .pipe(
-//           retry(1),
-//           catchError(this.handleError)
-//         )
-//     }
-// }
+getToken() {
+  return this.http.get(this.apiToken)
+    .pipe(
+      retry(1),
+      catchError(this.handleError)
+    )
+    
+}
 
 //   addTokenToHeader() {
 //     this.error = null;
