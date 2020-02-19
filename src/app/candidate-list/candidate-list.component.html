@@ -29,7 +29,7 @@
         <button class="btn btn-warning" (click)="onGetToken()">
           Show Token
         </button>
-        <button class="btn btn-success">
+        <button class="btn btn-success" (click)="onAddHeader()" *ngIf="token">
           Add Header
         </button>
         <hr>

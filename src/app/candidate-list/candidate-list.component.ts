@@ -3,6 +3,7 @@ import { ApiService } from '../api.service';
 import { Candidate } from '../candidate';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-candidate-list',
@@ -13,7 +14,7 @@ export class CandidateListComponent implements OnInit {
 
   candidate: any = [];
   searchById: any = [];
-  loadCandidateById:number;
+  loadCandidateById: number;
   filteredCandidates: Candidate[] = [];
   candidates: Candidate[] = [];
   _listFilter = '';
@@ -25,20 +26,22 @@ export class CandidateListComponent implements OnInit {
   }
   set listFilter(value: string) {
     this._listFilter = value;
-    this.filteredCandidates = this.listFilter ? this.doFilter(this.listFilter): this.candidates;
+    this.filteredCandidates = this.listFilter ? this.doFilter(this.listFilter) : this.candidates;
   }
 
-  doFilter(filterBy: string): Candidate[]{
+  doFilter(filterBy: string): Candidate[] {
     filterBy = filterBy.toLocaleLowerCase();
-    return this.candidates.filter((candidate: Candidate) => candidate.name.toLocaleLowerCase().indexOf(filterBy)!== -1);
+    return this.candidates.filter((candidate: Candidate) => candidate.name.toLocaleLowerCase().indexOf(filterBy) !== -1);
   }
 
   constructor(
     public api: ApiService,
     public route: ActivatedRoute,
     public router: Router,
-    ) { this.filteredCandidates = this.candidates;
-      this.listFilter = '';}
+  ) {
+  this.filteredCandidates = this.candidates;
+    this.listFilter = '';
+  }
 
   ngOnInit() {
     this.loadCandidates()
@@ -110,7 +113,19 @@ export class CandidateListComponent implements OnInit {
       })
     })
   }
+  onAddHeader() {
+    console.log(this.token);
+    this.api.addTokenToHeader(this.token).subscribe(response => {
+      console.log(response);
+      // alert(response['message']);
+      return Swal.fire({
+        title: 'Message:',
+        confirmButtonText: 'Ok',
+        text: response['message']
+      })
+    })
 
+  }
 
 }
 
