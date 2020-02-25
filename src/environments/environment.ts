@@ -12,6 +12,9 @@
 
 export const environment = {
   production: false
+  // serverEndPoint: server,
+  // socketServer,
+  // socketOpts
 };
 
 /*
