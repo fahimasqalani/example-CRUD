@@ -4,7 +4,6 @@
 
 
 // const server = 'http://134.209.99.198:4102';
-// const server = 'http://139.59.226.52:10000';
 // const server = '../assets/data';
 
 // const socketServer = server;
