@@ -1,0 +1,106 @@
+<div class="m-grid__item m-grid__item--fluid m-grid m-grid--ver-desktop m-grid--desktop m-grid--tablet-and-mobile m-grid--hor-tablet-and-mobile m-login m-login--1 m-login--signin" id="m_login">
+	<div class="m-grid__item m-grid__item--order-tablet-and-mobile-2 m-login__aside">
+		<div class="m-stack m-stack--hor m-stack--desktop">
+			<div class="m-stack__item m-stack__item--fluid">
+				<div class="m-login__wrapper">
+					<div class="m-login__logo">
+						<img src="./assets/images/fs.png" width="150px">
+					</div>
+					<div class="m-login__signin">
+						<div class="m-login__head">
+							<h3 class="m-login__title">
+								Sign In
+							</h3>
+						</div>
+						<form (ngSubmit)="f.form.valid && signin()" #f="ngForm" class="m-login__form m-form" action="">
+							<ng-template #alertSignin></ng-template>
+							<div class="form-group m-form__group">
+								<input class="form-control m-input" type="text" placeholder="Username" name="username" [(ngModel)]="model.username" #username="ngModel" autocomplete="off">
+								<input class="form-control m-input" type="password" placeholder="Password" name="password" [(ngModel)]="model.password" #password="ngModel" autocomplete="off">
+							</div>
+							<div class="m-login__form-action">
+								<button [disabled]="loading" [ngClass]="{'m-loader m-loader--right m-loader--light': loading}" id="m_login_signin_submit" class="btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air">
+									Sign In
+								</button>
+							</div>
+						</form>
+					</div>
+
+					<div class="form-group m-form__group row">
+						<div class="col-12">
+							<div class="m-form__control m--align-center">
+								<a data-toggle="modal" data-target="#forget_modal">
+									<span class="forget-password cursor">{{ 'Forget Password' | translate }} ?</span>
+								</a>
+							</div>
+						</div>
+					</div>
+
+					<!-- <div class="form-group m-form__group row m--margin-top-100">
+						<div class="col-12">
+							<div class="m-form__control">
+								<select class="form-control m-select m-select--solid" id="language" (change)="changeLanguage()">
+									<option value="en" >
+										English
+									</option>
+									<option value="zh-sg">
+										Chinese
+									</option>
+								</select>
+							</div>
+						</div>
+					</div> -->
+						
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="m-grid__item m-grid__item--fluid m-grid m-grid--center m-grid--hor m-grid__item--order-tablet-and-mobile-1 m-login__content boxShadow" 
+			style="background-image: url(./assets/app/media/img/bg/bg-4.jpg); position:relative;">
+		<div class="m-grid__item m-grid__item--middle">
+			<h3 class="m-login__welcome">
+				Your trusted Business IT Partner.
+			</h3>
+			<p class="m-login__msg">
+				We aspire to be Asia’s most innovative retail solution provider and a trusted IT partner of SMEs.
+			</p>
+		</div>
+		<div class="company w-100 m--hidden-tablet-and-mobile">
+			<ng-container *ngTemplateOutlet="companyInfo"></ng-container>
+		</div>
+	</div>
+</div>
+
+<ng-template #companyInfo>
+	<p>D Lithium 82 Playfair Road #10-01 Singapore 368001</p>
+	<p>Office (65) 63846598 | www.flex-solver.com.sg</p>
+	<p style="font-size: 0.85rem">&copy; {{ year }}. All Rights Reserved by Flex-Solver.</p>
+</ng-template>
+
+<div class="modal fade show" id="forget_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" data-backdrop="static">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">{{ 'Forgotten Password ?' | translate }}</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="resetModal()">
+					<span aria-hidden="true">×</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form>
+					<div class="form-group" [ngClass]="{'has-danger': validEmail===false}">
+						<label class="col-form-label">{{ 'Enter your email to reset your password' | translate }}</label>
+						<input type="email" class="form-control" placeholder="{{ 'Email' | translate }}" [(ngModel)]="resetEmail" [ngModelOptions]="{standalone: true}" 
+							[ngClass]="{'has-danger': validEmail===false}" (ngModelChange)="validateEmail()">
+						<span class="form-control-feedback has-danger" *ngIf="validEmail===false">
+							{{ 'Invalid email format' | translate }}
+						</span>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air" [disabled]="!validEmail" (click)="forgetPassword()">{{ 'Reset' | translate }}</button>
+			</div>
+		</div>
+	</div>
+</div>

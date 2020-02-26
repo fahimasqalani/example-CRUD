@@ -1,0 +1,66 @@
+<div class="m-subheader" sticky-header>
+	<div class="row">
+		<div class="col-sm-12 col-lg-6 col-xl-6">
+			<h3 class="m-subheader__title">
+				{{ 'Angular Form' | translate }}
+			</h3>
+		</div>
+		<div class="col-sm-12 col-lg-6 col-xl-6 m--align-right top-sticky">
+			<button class="btn btn-primary m-btn" (click)="noSubmit()">
+				{{ 'Submit' | translate }}
+			</button>
+		</div>
+	</div>
+</div>
+
+
+<div class="m-content">
+    <div class="m-portlet m-portlet--mobile">
+        <div class="m-portlet__body">
+			<div class="m-form__section m-form__section--first" [formGroup]="form">
+				<div class="form-group m-form__group row">
+					<div class="col-12">
+						<div class="row">
+							<div class="col-sm-12 col-lg-6 col-xl-6" [ngClass]="{'has-danger': form.get('name').invalid && form.get('name').touched}">
+								<label>{{ 'Name' | translate }} *</label>
+								<input class="form-control m-input" formControlName="name" />
+								<span class="form-control-feedback" *ngIf="form.hasError('required', 'name') && form.get('name').touched">
+									{{ 'This field is required' | translate }}
+								</span>
+							</div>
+							<div class="col-sm-12 col-lg-6 col-xl-6 top" [ngClass]="{'has-danger': form.get('notAllow').invalid && form.get('notAllow').touched}">
+								<label>{{ 'Not Allow' | translate }}</label>
+								<input class="form-control m-input" formControlName="notAllow" />
+							</div>
+						</div>
+						<div class="row m--margin-top-20">
+							<div class="col-sm-12 col-lg-6 col-xl-6">
+								<label>{{ 'Description' | translate }}</label>
+								<input class="form-control m-input" formControlName="description" />
+							</div>
+							<div class="col-sm-12 col-lg-6 col-xl-6 top" [ngClass]="{'has-danger': form.get('email').invalid && form.get('email').touched}">
+								<label>{{ 'Email' | translate }} *</label>
+								<input class="form-control m-input" formControlName="email" />
+								<span class="form-control-feedback" *ngIf="form.hasError('required', 'email') && form.get('email').touched">
+									{{ 'This field is required' | translate }}
+								</span>
+								<span class="form-control-feedback" *ngIf="form.hasError('email', 'email') && form.get('email').touched && !form.hasError('required', 'email')">
+									{{ 'Invalid email format' | translate }}
+								</span>
+							</div>
+						</div>
+						<div class="row m--margin-top-20">
+							<div class="col-sm-12 col-lg-6 col-xl-6" [ngClass]="{'has-danger': form.get('presetValue').invalid && form.get('presetValue').touched}">
+								<label>{{ 'Preset Value' | translate }} *</label>
+								<input class="form-control m-input" formControlName="presetValue" />
+								<span class="form-control-feedback" *ngIf="form.hasError('required', 'presetValue') && form.get('presetValue').touched">
+									{{ 'This field is required' | translate }}
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

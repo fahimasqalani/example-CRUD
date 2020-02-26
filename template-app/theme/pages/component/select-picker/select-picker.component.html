@@ -1,0 +1,30 @@
+<div class="m-subheader" sticky-header>
+	<div class="row">
+		<div class="col-sm-12 col-lg-6 col-xl-6">
+			<h3 class="m-subheader__title">
+				{{ 'Select Picker' | translate }}
+			</h3>
+		</div>
+	</div>
+</div>
+
+<div class="m-content">
+    <div class="m-portlet m-portlet--mobile">
+        <div class="m-portlet__body" [style.height]="'500px'">
+			<div class="row">
+				<div class="col-6">
+					<div class="form-group m-form__group m--margin-top-15">
+						<div class="m-form__control">
+							<select id="picker" data-live-search="true" data-size="5" 
+								class="form-control" [(ngModel)]="data">
+								<option *ngFor="let l of list" [value]="l.id">
+									{{ l.name }}
+								</option>
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

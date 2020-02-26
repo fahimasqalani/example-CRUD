@@ -1,0 +1,34 @@
+<div class="m-subheader" sticky-header>
+	<div class="row">
+		<div class="col-sm-12 col-lg-6 col-xl-6">
+			<h3 class="m-subheader__title">
+				{{ 'Image Crop' | translate }}
+			</h3>
+		</div>
+	</div>
+</div>
+
+<div class="m-content">
+    <div class="m-portlet m-portlet--mobile">
+        <div class="m-portlet__body">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="form-group m-form__group">
+						<input type="file" class="form-control m-input" (change)="onUploadFile($event)" />
+					</div>
+				</div>
+			</div>
+			<p>
+				support [outputFormat], to control output image format, default jpeg
+			</p>
+			<p class="m--font-danger">
+				* If set to png, compression will be ignore
+			</p>
+		</div>
+	</div>
+</div>
+
+
+<ng-container *ngIf="imageChangedEvent">
+	<app-image-crop [imageChangedEvent]="imageChangedEvent" [outputFormat]="'png'" (reset)="resetCrop()" (uploaded)="setImage($event)"></app-image-crop>
+</ng-container>

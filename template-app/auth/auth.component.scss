@@ -1,0 +1,36 @@
+.forget-password:hover {
+    color: #5867dd;
+}
+.has-danger {
+    border-color: #f4516c!important;
+}
+// .m-login__welcome {
+//     font-size: 4rem !important;
+//     font-weight: 800 !important;
+// }
+// .m-login__msg {
+//     font-size: 1.2rem !important;
+//     opacity: 0.4;
+// }
+.company {
+    color: #fff;
+    &.mobile {
+        color: #6c6c6c;
+        position: relative;
+        margin-top: 2.2rem;
+    }
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    font-weight: 500;
+    p {
+       margin-bottom: .3rem; 
+    }
+}
+.welcome-msg-wrapper {
+    background: rgba(0,0,0,0.3);
+    padding: 0.8rem;
+    border-radius: 10px;
+}

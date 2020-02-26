@@ -1,0 +1,25 @@
+<div class="m-subheader" sticky-header>
+	<div class="row">
+		<div class="col-sm-12 col-lg-6 col-xl-6">
+			<h3 class="m-subheader__title">
+				{{ 'Image Zoom' | translate }}
+			</h3>
+		</div>
+	</div>
+</div>
+
+<div class="m-content">
+    <div class="m-portlet m-portlet--mobile">
+        <div class="m-portlet__body">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="form-group m-form__group">
+						<img class="w-50 cursor" [src]="imageUrl" (click)="zoomImage()" />
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<app-image-zoom [modalImg]="modalImg"></app-image-zoom>

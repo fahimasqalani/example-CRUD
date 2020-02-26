@@ -1,0 +1,136 @@
+<div class="m-subheader" sticky-header>
+	<div class="row">
+		<div class="col-sm-12 col-lg-6 col-xl-6">
+			<h3 class="m-subheader__title">
+				{{ 'Permissions' | translate }}
+			</h3>
+		</div>
+		<div class="col-sm-12 col-lg-6 col-xl-6 m--align-right top-sticky">
+			<button class="btn btn-primary" (click)="onSubmit()">
+				{{ 'Save Changes' | translate }}
+			</button>
+		</div>
+	</div>
+</div>
+
+<div class="m-content">
+    <div class="m-portlet m-portlet--mobile">
+		<div class="m-portlet__body">
+			<ul class="nav nav-tabs  m-tabs-line m-tabs-line--2x m-tabs-line--primary">
+				<ng-container *ngFor="let a of accessibility; let i=index">
+					<li *ngIf="a.path" class="nav-item m-tabs__item" (click)="setPermission(i)">
+						<a class="nav-link m-tabs__link active" [ngClass]="{'active':i==0}"  data-toggle="tab" href="#tab" role="tab">
+							<span class="cursor">{{ a.title | translate }}</span>
+						</a>
+					</li>
+				</ng-container>
+			</ul>                        
+			<div class="tab-content">
+				<div class="tab-pane active" id="tab" role="tabpanel">
+					<div class="row m--margin-top-20">
+						<div class="col-sm-12 col-lg-6 col-xl-6">
+							<h5 class="m--padding-top-10">{{ 'Selection' | translate }}</h5>
+						</div>
+						<div class="col-sm-12 col-lg-6 col-xl-6 top m--align-right">
+							<div class="btn-group m-btn-group" role="group" >
+								<button type="button" class="m-btn m-btn--square btn btn-primary" (click)="selectAll()">
+									{{ 'Select All' | translate }}
+								</button>
+								<button type="button" class="btn btn-outline-primary" (click)="unselectAll()">
+									{{ 'Unselect All' | translate }}
+								</button>
+							</div>
+						</div>
+					</div>
+					<div class="m-demo__preview m--margin-top-20">
+						<div *ngIf="permission.length" class="row">
+							<ng-container *ngFor="let p of permission">
+								<div class="col-sm-12 col-lg-4 col-xl-3">
+									<div class="row">
+										<div class="col-6">
+											<label class="m--padding-top-20">
+												{{ p.title | translate }}
+											</label>
+										</div>
+										<div class="col-6">
+											<span class="m-switch m-switch--outline m-switch--success m--margin-top-10">
+												<label>
+													<input type="checkbox" [(ngModel)]="p['enabled']">
+													<span></span>
+												</label>
+											</span>
+										</div>
+									</div>
+								</div>
+							</ng-container>
+						</div>
+						<div *ngIf="!permission.length" class="row">
+							<div class="col-sm-12 col-lg-4 col-xl-3">
+								<div class="row">
+									<div class="col-6">
+										<label class="m--padding-top-20">
+											{{ selected.title | translate }}
+										</label>
+									</div>
+									<div class="col-6">
+										<span class="m-switch m-switch--outline m-switch--success m--margin-top-10">
+											<label>
+												<input type="checkbox" [(ngModel)]="selected['enabled']">
+												<span></span>
+											</label>
+										</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>      
+		</div>
+	</div>
+
+	<div class="m-portlet m-portlet--mobile">
+		<div class="m-portlet__body">
+			<p>
+				Note: By using this method, is entirety rely on FRONTEND to prepare the sidebar content.
+			</p>
+			<p>
+				Few things to take note:
+			</p>
+			<ul>
+				<li>
+					Make sure the module are well organize and structure according to the permission list
+				</li>
+				<li>
+					Prepare a 'guard' file for each module, refer to '../guard.ts'
+				</li>
+				<li>
+					Make sure the accessibility.ts file follow proper JSON format, this is meant for development as you can 
+					copy n paste for BACKEND developer to directly insert to DB
+				</li>
+				<li>
+					Under 'layouts > aside-nav.component.ts', it will check againt user info, if permission settings is found, will use it if not will use the default set.
+					Of course you can made ammendment to if is not found, kick the user out or something else
+				</li>
+				<li>
+					Do not change anything under 'layouts > aside-nav.component.html' unless bugs found lololo
+				</li>
+			</ul>
+			<hr class="m--margin-top-30 m--margin-bottom-30"/>
+			<p>
+				What if new module is added at later stage?
+			</p>
+			<ul>
+				<li>
+					Add the new set into 'accessibility.ts' file
+				</li>
+				<li>
+					Refer to method getOneAccount(), this will make sure when perform user edit, the new set will added to the permission
+				</li>
+				<li>
+					The CONS of this method is need to edit all the users 1 by 1 as mass update way is impossible to handle at FRONTEND, but chill this unlikely will happen
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>

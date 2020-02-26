@@ -1,0 +1,119 @@
+<div class="m-subheader">
+    <div class="d-flex align-items-center">
+        <div class="mr-auto">
+            <h3 class="m-subheader__title">
+                {{ 'Settings' | translate }}
+            </h3>
+        </div>
+    </div>
+</div>
+
+<div class="m-content">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="m-portlet">
+                <div class="m-portlet__body">
+                    <div class="m-form__section m-form__section--first">
+                        <div class="form-group m-form__group row">
+                            <label class="col-lg-3 col-form-label">
+                                {{ 'Name' | translate }}:
+                            </label>
+                            <div class="col-lg-6">
+                                <input class="form-control m-input" [value]="userDetails?.employeeName" type="text" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group m-form__group row">
+                            <label class="col-lg-3 col-form-label">
+                                {{ 'Email' | translate }}:
+                            </label>
+                            <div class="col-lg-6">
+                                <input class="form-control m-input" [value]="userDetails?.email" type="text" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group m-form__group row">
+                            <label class="col-lg-3 col-form-label">
+                                {{ 'Language' | translate }}:
+                            </label>
+                            <div class="col-lg-6">
+                                <div class="m-form__control">
+                                    <select class="form-control custom-select" id="language" (change)="changeLanguage()">
+                                        <option value="en" >
+                                            {{ 'English' | translate }}
+                                        </option>
+                                        <option value="zh-sg">
+                                            {{ 'Chinese' | translate }}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group m-form__group row" *ngIf="!changePass">
+                            <label class="col-lg-3 col-form-label">
+                                {{ 'Password' | translate }}
+                            </label>
+                            <div class="col-lg-6">
+                                <button class="btn btn-brand" type="button" (click)="changePass=true">{{ 'Change Password' | translate }}</button>
+                            </div>
+                        </div>
+
+                        <hr class="m--margin-top-50 m--margin-bottom-50" *ngIf="changePass"/>
+
+                        <form [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="changePass">
+                            <div class="m-form__section m-form__section--first">
+                                <div class="form-group m-form__group row" [ngClass]="{'has-danger': form.get('oldPassword').invalid && form.get('oldPassword').touched}">
+                                    <label class="col-lg-3 col-form-label">
+                                        {{ 'Current Password' | translate }}:
+                                    </label>
+                                    <div class="col-lg-6 col-sm-11">
+                                        <input type="password" class="form-control m-input" formControlName="oldPassword">
+                                        <span class="form-control-feedback" *ngIf="form.get('oldPassword').invalid && form.get('oldPassword').touched">
+                                            {{ 'This field is required' | translate }}
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="form-group m-form__group row" [ngClass]="{'has-danger': form.get('newPassword').invalid && form.get('newPassword').touched}">
+                                    <label class="col-lg-3 col-form-label">
+                                        {{ 'New Password' | translate }}:
+                                    </label>
+                                    <div class="col-lg-6 col-sm-11">
+                                        <input type="password" class="form-control m-input" formControlName="newPassword">
+                                        <span class="form-control-feedback" *ngIf="form.hasError('required', 'newPassword') && form.get('newPassword').touched">
+                                            {{ 'This field is required' | translate }}
+                                        </span>
+                                        <!-- <span class="form-control-feedback" *ngIf="form.hasError('minlength', 'newPassword') && form.get('newPassword').touched && !form.hasError('required', 'newPassword')">
+                                            {{ 'Password must be of minimum 6 characters length' | translate }}
+                                        </span> -->
+                                    </div>
+                                </div>
+                                <div class="form-group m-form__group row" [ngClass]="{'has-danger': form.get('newPasswordAgain').invalid && form.get('newPasswordAgain').touched}">
+                                    <label class="col-lg-3 col-form-label">
+                                        {{ 'Repeat New Password' | translate }}: 
+                                    </label>
+                                    <div class="col-lg-6 col-sm-11">
+                                        <input type="password" class="form-control m-input" formControlName="newPasswordAgain">
+                                        <span class="form-control-feedback" *ngIf="form.get('newPasswordAgain').errors?.required && form.get('newPasswordAgain').touched">
+                                            {{ 'This field is required' | translate }}
+                                        </span>
+                                        <span class="form-control-feedback" *ngIf="!form.get('newPasswordAgain').errors?.required && form.get('newPasswordAgain').errors?.doNotMatch && form.get('newPasswordAgain').touched">
+                                            {{ 'New Password do not match' | translate }}
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="form-group m-form__group row">
+                                    <label class="col-lg-3 col-form-label">
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <button class="btn btn-brand" type="submit">{{ 'Submit' | translate }}</button>
+                                        <button class="btn btn-outline-brand m-btn m-btn--outline-2x m--margin-left-20" (click)="cancelChange()">
+                                            {{ 'Cancel' | translate }}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

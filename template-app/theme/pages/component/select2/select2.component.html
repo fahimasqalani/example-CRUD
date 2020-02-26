@@ -1,0 +1,29 @@
+<div class="m-subheader" sticky-header>
+	<div class="row">
+		<div class="col-sm-12 col-lg-6 col-xl-6">
+			<h3 class="m-subheader__title">
+				{{ 'Select 2' | translate }}
+			</h3>
+		</div>
+	</div>
+</div>
+
+<div class="m-content">
+    <div class="m-portlet m-portlet--mobile">
+        <div class="m-portlet__body">
+			<div class="row m--margin-bottom-20">
+				<div class="col-sm-12 col-lg-8 col-xl-8">
+					<label>
+						{{ 'Outlet(s)' | translate }}
+					</label>
+					<label class="m-checkbox m-checkbox--bold m-checkbox--state-primary m--padding-bottom-5 m--margin-left-20">
+						<input type="checkbox" [(ngModel)]="isAllOutlets" (ngModelChange)="toggleOutlets()">
+						{{ 'All Outlets' | translate }}
+						<span></span>
+					</label>
+					<select class="form-control m-select2" id="m_outlets_select" name="param"></select>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
