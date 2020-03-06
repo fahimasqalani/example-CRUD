@@ -22,12 +22,6 @@ export class CandidateCreateComponent implements OnInit {
   ngOnInit() {
     this.initForm();
   }
-  // addCandidate() {
-  //   this.api.createCandidate(this.candidateDetails).subscribe((data: {}) => {
-  //     console.log(data)
-  //     this.router.navigate(['/list'])
-  //   })
-  // }
 
   private initForm() {
     this.candidateForm = new FormGroup({
